@@ -6,5 +6,4 @@ export default async function (commit) {
     commit('updateBtcRate', response.data["bitcoin"]["usd"])
     commit('updateEthRate', response.data["ethereum"]["usd"])
     commit('updateBtcRateInEth', responseBtcEth.data["bitcoin"]["eth"])
-    console.log('request')
 }
