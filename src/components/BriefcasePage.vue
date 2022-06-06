@@ -72,11 +72,11 @@ export default {
   },
   methods: {
     onFillWallet() {
-      let isValidAmount = !!this.amount
+      let isValidAmount = this.amount
       let isValidCurrency = this.currency === ''
-      if (!isValidAmount || isValidCurrency) {
+      if (!isValidAmount || isValidCurrency <= 0) {
         let error = (isValidCurrency ? `You must select a currency. ` : '') +
-            (!isValidAmount ? 'You must entre the amount.' : '')
+            ((isValidAmount <= 0) ? 'You must entre the valid amount.' : '')
         this.$refs.alert.showAlert('error',
             error,
             'Error',
@@ -94,12 +94,12 @@ export default {
               iconType: 'solid',
               position: 'top right'
             })
+        this.$store.dispatch('rateModule/fillWallet', {
+          currency: `${this.currency}`,
+          amount: this.amount
+        })
+        this.amount = 0
       }
-      this.$store.dispatch('rateModule/fillWallet', {
-        currency: `${this.currency}`,
-        amount: this.amount
-      })
-      this.amount = 0
     }
   }
 }
