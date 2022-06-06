@@ -46,7 +46,7 @@ export default {
 <style scoped>
 .chart {
   width: 45%;
-  min-width: 300px;
+  min-width: 260px;
   margin: 20px 20px;
   border-radius: 5px;
   border: #cac3e9 solid 2px;

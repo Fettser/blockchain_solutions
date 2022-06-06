@@ -57,6 +57,9 @@ export default {
             const response = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${from.split(',')[0]}&vs_currencies=${to.split(',')[1]}`)
             commit(`update_${from.split(',')[1]}Wallet`, -amount)
             commit(`update_${to.split(',')[1]}Wallet`, amount * Number(response.data[`${from.split(',')[0]}`][`${to.split(',')[1]}`]))
+        },
+        fillWallet({commit}, {currency, amount}) {
+            commit(`update_${currency}Wallet`, amount)
         }
     },
     namespaced: true
