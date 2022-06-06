@@ -45,11 +45,11 @@ export default {
   },
   methods: {
     onConvertCurrency() {
-      let isInvalidAmount = this.amountFrom > this.$store.getters[`rateModule/get_${this.convertFrom.split(',')[1]}Wallet`]
+      let isInvalidAmount = this.amountFrom < 0 || this.amountFrom > this.$store.getters[`rateModule/get_${this.convertFrom.split(',')[1]}Wallet`]
       let isEqualCurrencies = this.convertFrom === this.convertTo
       let isInvalidCurrency = this.convertFrom === '' || this.convertTo === ''
       if (isInvalidAmount || isEqualCurrencies || isInvalidCurrency) {
-        let error = (isInvalidAmount ? `You don't have enough ${this.convertFrom.split(',')[0]} on your balance. ` : '') +
+        let error = (isInvalidAmount ? `You don't have enough ${this.convertFrom.split(',')[0]} on your balance or the amount is less than zero. ` : '') +
             (isEqualCurrencies ? 'Currencies must be different. ' : '') + (isInvalidCurrency ? 'Choose currencies. ' : '')
         this.$refs.alert.showAlert('error',
             error,
